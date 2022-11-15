@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
+    var isInFocusMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +47,10 @@ class ViewController: UIViewController {
         cent.add(req) { (error) in
             
         }
+    }
+    
+    @IBAction func focusButtonClicked(_ sender: Any) {
+        
     }
     
     func addNewFakeData(){
