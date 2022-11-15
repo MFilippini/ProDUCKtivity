@@ -42,9 +42,17 @@ class ViewController: UIViewController {
         content.body = "Come back and get on track!"
         
         //trigger
-        let date = Date().addingTimeInterval(15)
-        let dateComps = Calendar.current.dateComponents([.year, .month, .day, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: false)
+      //  let date = Date().addingTimeInterval(15)
+        
+        var dateComps = DateComponents()
+        dateComps.calendar = Calendar.current
+//        let dateComps = Calendar.current.dateComponents([.year, .month, .day, .minute, .second], from: date)
+        
+        dateComps.weekday = 1-7 // Tuesday , comm bc want daily, 1 thru 7??
+        dateComps.hour = 18    // 18:00 hours
+        
+        
+        let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: true)
         //create req
         let strNot = UUID().uuidString
         let req = UNNotificationRequest(identifier: strNot, content: content, trigger: trigger)
