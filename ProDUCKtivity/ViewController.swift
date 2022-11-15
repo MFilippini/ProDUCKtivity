@@ -22,8 +22,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addNewFakeData()
-        
+        setupNotifications()
+        displayUnfocusedState()
+    }
+    
+    func setupNotifications(){
         //permiss
         let cent = UNUserNotificationCenter.current()
         
@@ -49,9 +52,30 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func focusButtonClicked(_ sender: Any) {
-        
+    func displayUnfocusedState(){
+        timerLabel.isHidden = true
+        messageLabel.text = "Get your ducks in a row!"
+        startButton.setTitle("Get Focused", for: .normal)
     }
+    
+    func displayFocusedState(){
+        timerLabel.isHidden = false
+        messageLabel.text = "You're doing great! Keep Flappin'"
+        startButton.setTitle("End Focus", for: .normal)
+    }
+    
+    
+    @IBAction func focusButtonClicked(_ sender: Any) {
+        isInFocusMode = !isInFocusMode
+        
+        if isInFocusMode {
+            displayFocusedState()
+        }
+        else {
+            displayUnfocusedState()
+        }
+    }
+    
     
     func addNewFakeData(){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

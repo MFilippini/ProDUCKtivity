@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PkO-My-4MQ">
-                                <rect key="frame" x="125" y="239" width="140" height="70"/>
+                                <rect key="frame" x="125" y="299" width="140" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="Bej-hM-F6i"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="quk-j9-Nvm"/>
@@ -43,10 +43,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your ducks in a row!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTA-rF-iPf">
-                                <rect key="frame" x="28" y="99" width="334.33333333333331" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your ducks in a row!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTA-rF-iPf">
+                                <rect key="frame" x="28" y="99" width="334.33333333333331" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ve6-e9-bkP"/>
+                                    <constraint firstAttribute="height" constant="100" id="ve6-e9-bkP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="31"/>
                                 <nil key="textColor"/>
