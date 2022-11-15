@@ -7,13 +7,15 @@
 
 import UIKit
 import UserNotifications
+import CoreData
 
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        addNewFakeData()
         
         //permiss
         let cent = UNUserNotificationCenter.current()
@@ -37,6 +39,27 @@ class ViewController: UIViewController {
         
         cent.add(req) { (error) in
             
+        }
+    }
+    
+    func addNewFakeData(){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "FocusSession", in: context)!
+        let focusSession = NSManagedObject(entity: entity, insertInto: context)
+        
+        focusSession.setValue(Date(), forKey: "date")
+        focusSession.setValue(43, forKey: "length")
+        focusSession.setValue("study", forKey: "category")
+
+        do {
+            try context.save()
+        } catch {
+ 
         }
     }
 
