@@ -12,6 +12,11 @@ import CoreData
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var startButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +58,7 @@ class ViewController: UIViewController {
         let focusSession = NSManagedObject(entity: entity, insertInto: context)
         
         focusSession.setValue(Date(), forKey: "date")
-        focusSession.setValue(43, forKey: "length")
+        focusSession.setValue(43, forKey: "duration")
         focusSession.setValue("study", forKey: "category")
 
         do {
