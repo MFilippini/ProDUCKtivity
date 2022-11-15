@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     
     var isInFocusMode = false
+    var focusTimer = Timer()
+    var focusTime = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,15 +72,19 @@ class ViewController: UIViewController {
         
         if isInFocusMode {
             displayFocusedState()
+            startFocusTimer()
         }
         else {
             displayUnfocusedState()
+            logFocusSession()
         }
     }
     
-    
-    func addNewFakeData(){
+    func logFocusSession(){
+        focusTimer.invalidate()
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            focusTime = 0
             return
         }
         
@@ -88,7 +94,7 @@ class ViewController: UIViewController {
         let focusSession = NSManagedObject(entity: entity, insertInto: context)
         
         focusSession.setValue(Date(), forKey: "date")
-        focusSession.setValue(43, forKey: "duration")
+        focusSession.setValue(focusTime, forKey: "duration")
         focusSession.setValue("study", forKey: "category")
 
         do {
@@ -96,6 +102,19 @@ class ViewController: UIViewController {
         } catch {
  
         }
+        
+        focusTime = 0
+    }
+    
+    func startFocusTimer(){
+        focusTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateTime(){
+        focusTime += 1
+        let minutes = focusTime/60
+        let seconds = focusTime%60
+        timerLabel.text = String(format: "%d:%02d", minutes, seconds)
     }
 
 

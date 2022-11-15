@@ -44,9 +44,15 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let category = session.value(forKey: "category") as! String
         
         cell.dateLabel.text = date.formatted(Date.FormatStyle().month(.twoDigits).day(.defaultDigits))
-        cell.durationLabel.text = "\(duration) minutes"
         cell.categoryLabel.text = category
-
+        
+        if duration > 60 {
+            cell.durationLabel.text = "\(duration/60) minutes"
+        }
+        else {
+            cell.durationLabel.text = "\(duration/60) min \(duration%60) sec"
+        }
+        
         return cell
     }
     
