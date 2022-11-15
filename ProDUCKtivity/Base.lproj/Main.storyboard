@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5Fg-1k-NAX">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +13,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ToDoViewController" customModule="ProDUCKtivity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -29,7 +29,7 @@
             <objects>
                 <viewController id="ZDp-WR-KU4" customClass="ViewController" customModule="ProDUCKtivity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1gk-ny-5Si">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="aTK-Ae-2PS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -66,7 +66,7 @@
             <objects>
                 <viewController id="PvZ-IH-ZIw" customClass="SettingsViewController" customModule="ProDUCKtivity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DRD-8N-1jI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="OiT-Hb-SKM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,12 +82,27 @@
             <objects>
                 <viewController id="ZrS-Gx-GTN" customClass="DataViewController" customModule="ProDUCKtivity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ina-wH-ADv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aBM-SR-F9I">
+                                <rect key="frame" x="0.0" y="44" width="390" height="717"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2RY-ES-VH2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2RY-ES-VH2" firstAttribute="bottom" secondItem="aBM-SR-F9I" secondAttribute="bottom" id="2kb-1O-ZOd"/>
+                            <constraint firstItem="aBM-SR-F9I" firstAttribute="leading" secondItem="2RY-ES-VH2" secondAttribute="leading" id="HIe-cC-JLl"/>
+                            <constraint firstItem="2RY-ES-VH2" firstAttribute="trailing" secondItem="aBM-SR-F9I" secondAttribute="trailing" id="Q1o-1d-UKW"/>
+                            <constraint firstItem="aBM-SR-F9I" firstAttribute="top" secondItem="2RY-ES-VH2" secondAttribute="top" id="pr7-do-sNM"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Data" image="chart.xyaxis.line" catalog="system" id="HJe-zn-dwr"/>
+                    <connections>
+                        <outlet property="pastSessionsTableView" destination="aBM-SR-F9I" id="0HL-Pa-tBW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xs6-iJ-0Wk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

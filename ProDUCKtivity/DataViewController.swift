@@ -9,6 +9,10 @@ import UIKit
 
 class DataViewController: UIViewController {
 
+    @IBOutlet weak var pastSessionsTableView: UITableView!
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
