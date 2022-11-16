@@ -38,20 +38,18 @@ class ViewController: UIViewController {
         }
         //notif content
         let content = UNMutableNotificationContent()
-        content.title = "Reminder!"
+        content.title = "Get Quackin'!"
         content.body = "Come back and get on track!"
         
         //trigger
-      //  let date = Date().addingTimeInterval(15)
         
         var dateComps = DateComponents()
         dateComps.calendar = Calendar.current
 //        let dateComps = Calendar.current.dateComponents([.year, .month, .day, .minute, .second], from: date)
         
-       // dateComps.weekday = 1-7 // Tuesday , comm bc want daily, 1 thru 7??
      
-        dateComps.hour = 19    // 19:00 hours
-     dateComps.minute = 33   // min
+        dateComps.hour = 21
+        dateComps.minute = 40
         
         
         let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: true)
@@ -71,6 +69,7 @@ class ViewController: UIViewController {
     }
     
     func displayFocusedState(){
+        timerLabel.text = "0:00"
         timerLabel.isHidden = false
         messageLabel.text = "You're doing great! Keep Flappin'"
         startButton.setTitle("End Focus", for: .normal)

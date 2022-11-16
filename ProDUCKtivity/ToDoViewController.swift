@@ -21,8 +21,9 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // used developer.apple.com as reference for the following code.
-        setupTableView();
+        setupTableView()
         let store = EKEventStore()
+        
         store.requestAccess(to: .reminder) {granted, error in
             if let error = error {
                 print("request access error: \(error)")
@@ -35,11 +36,15 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 print("access denied")
             }
         }
-        
-        
+    
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getReminders()
+    }
+    
     func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -55,6 +60,7 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let predicate: NSPredicate? = store.predicateForReminders(in: nil)
         if let aPredicate = predicate {
             store.fetchReminders(matching: aPredicate, completion: {(_ reminders: [Any]?) -> Void in
+                self.theData = []
                 for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
                     let reminderStruct = Reminder(title: remind?.title ?? "")
                     self.theData.append(reminderStruct)
