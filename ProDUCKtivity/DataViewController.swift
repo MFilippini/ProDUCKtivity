@@ -6,28 +6,76 @@
 //
 
 import UIKit
+import CoreData
 
-class DataViewController: UIViewController {
-
-    @IBOutlet weak var pastSessionsTableView: UITableView!
-
+class DataViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var pastSessionsCollectionView: UICollectionView!
+    
+    var pastSessions: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupCollectionView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadSessionData()
+        pastSessionsCollectionView.reloadData()
     }
-    */
+    
+    func setupCollectionView(){
+        pastSessionsCollectionView.delegate = self
+        pastSessionsCollectionView.dataSource = self
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pastSessions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = pastSessionsCollectionView.dequeueReusableCell(withReuseIdentifier: "focusSessionCell", for: indexPath) as! PastSessionCollectionViewCell
+        let session = pastSessions[indexPath.row]
+        
+        let date = session.value(forKey: "date") as! Date
+        let duration = session.value(forKey: "duration") as! Int
+        let category = session.value(forKey: "category") as! String
+        
+        cell.dateLabel.text = date.formatted(Date.FormatStyle().month(.twoDigits).day(.defaultDigits))
+        cell.categoryLabel.text = category
+        
+        if duration > 60 {
+            cell.durationLabel.text = "\(duration/60) minutes"
+        }
+        else {
+            cell.durationLabel.text = "\(duration/60) min \(duration%60) sec"
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 300, height: 100)
+    }
+    
+    func loadSessionData(){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FocusSession")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        do {
+            pastSessions = try context.fetch(fetchRequest)
+        } catch {
+            let errorDecoding = UIAlertController(title: "We Couldn't Find Your Data", message: "Don't remember your past session data!", preferredStyle: .alert)
+            errorDecoding.addAction(UIAlertAction(title: "Ok", style: .cancel))
+            self.present(errorDecoding, animated: true, completion: nil)
+        }
+    }
 
 }
