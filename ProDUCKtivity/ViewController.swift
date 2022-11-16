@@ -51,7 +51,7 @@ class ViewController: UIViewController {
        // dateComps.weekday = 1-7 // Tuesday , comm bc want daily, 1 thru 7??
      
         dateComps.hour = 19    // 19:00 hours
-   //     dateComps.minute = 27   // min
+     dateComps.minute = 33   // min
         
         
         let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: true)
