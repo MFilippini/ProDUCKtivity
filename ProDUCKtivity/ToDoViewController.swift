@@ -9,13 +9,19 @@ import UIKit
 import EventKit
 
 
-class ToDoViewController: UIViewController {
+class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    @IBOutlet weak var todo: UICollectionView!
+    struct Reminder {
+        var title: String
+    }
+    @IBOutlet weak var tableView: UITableView!
+    
+    var theData:[Reminder] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // used developer.apple.com as reference for the following code.
-        
+        setupTableView();
         let store = EKEventStore()
         store.requestAccess(to: .reminder) {granted, error in
             if let error = error {
@@ -23,7 +29,7 @@ class ToDoViewController: UIViewController {
             }
             else if granted {
                 print("access granted")
-                self.getReminders();
+                self.getReminders()
             }
             else {
                 print("access denied")
@@ -33,19 +39,43 @@ class ToDoViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+    }
     
     func getReminders() {
         
         let store = EKEventStore()
         
         let predicate: NSPredicate? = store.predicateForReminders(in: nil)
-                if let aPredicate = predicate {
-                    store.fetchReminders(matching: aPredicate, completion: {(_ reminders: [Any]?) -> Void in
-                        for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
-                            print(remind?.title ?? "")
-                        }
-                    })
+        if let aPredicate = predicate {
+            store.fetchReminders(matching: aPredicate, completion: {(_ reminders: [Any]?) -> Void in
+                for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
+                    let reminderStruct = Reminder(title: remind?.title ?? "")
+                    self.theData.append(reminderStruct)
                 }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            })
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return theData.count
+    }
+        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+
+        cell.textLabel!.text = theData[indexPath.row].title
+        print(cell.textLabel!.text ?? "")
+        return cell
     }
     /*
     // MARK: - Navigation
