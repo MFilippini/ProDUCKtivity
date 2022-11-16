@@ -11,36 +11,42 @@ import EventKit
 
 class ToDoViewController: UIViewController {
 
+    @IBOutlet weak var todo: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // used developer.apple.com as reference for the following code.
         
         let store = EKEventStore()
-        
         store.requestAccess(to: .reminder) {granted, error in
             if let error = error {
                 print("request access error: \(error)")
             }
             else if granted {
                 print("access granted")
+                self.getReminders();
             }
             else {
                 print("access denied")
             }
         }
         
-        let predicate: NSPredicate? = store.predicateForReminders(in: nil)
-        if let aPredicate = predicate {
-            store.fetchReminders(matching: aPredicate, completion: {(_ reminders: [Any]?) -> Void in
-                for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
-                    print(remind?.title)
-                }
-            })
-        }
+        
         // Do any additional setup after loading the view.
     }
     
-
+    func getReminders() {
+        
+        let store = EKEventStore()
+        
+        let predicate: NSPredicate? = store.predicateForReminders(in: nil)
+                if let aPredicate = predicate {
+                    store.fetchReminders(matching: aPredicate, completion: {(_ reminders: [Any]?) -> Void in
+                        for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
+                            print(remind?.title ?? "")
+                        }
+                    })
+                }
+    }
     /*
     // MARK: - Navigation
 
