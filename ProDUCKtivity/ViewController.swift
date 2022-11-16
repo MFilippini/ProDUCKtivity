@@ -48,8 +48,10 @@ class ViewController: UIViewController {
         dateComps.calendar = Calendar.current
 //        let dateComps = Calendar.current.dateComponents([.year, .month, .day, .minute, .second], from: date)
         
-        dateComps.weekday = 1-7 // Tuesday , comm bc want daily, 1 thru 7??
-        dateComps.hour = 18    // 18:00 hours
+       // dateComps.weekday = 1-7 // Tuesday , comm bc want daily, 1 thru 7??
+     
+        dateComps.hour = 19    // 19:00 hours
+   //     dateComps.minute = 27   // min
         
         
         let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: true)
