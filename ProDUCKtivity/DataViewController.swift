@@ -12,11 +12,15 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var pastSessionsCollectionView: UICollectionView!
     
+    @IBOutlet weak var graphStackView: UIStackView!
+    @IBOutlet weak var dateStackView: UIStackView!
+    
     var pastSessions: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupGraph()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,11 +29,34 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
         pastSessionsCollectionView.reloadData()
     }
     
+    func setupGraph(){
+        setupDateBar()
+    }
+    
+    func setupDateBar(){
+        let calendar = Calendar(identifier: .iso8601)
+        let weekNumber = calendar.component(.weekOfYear, from: Date.now)
+        
+        var components = DateComponents()
+        components.weekOfYear = weekNumber
+        
+        let weekdayFormat = DateFormatter()
+        weekdayFormat.dateFormat = "EEEEE"
+        
+        // 2 is Monday and 8 is Sunday
+        for weekdayNumber in 2...8 {
+            components.weekday = weekdayNumber
+            let date = calendar.date(from: components) ?? Date.now
+
+            let dateStackItem = DateStackItem(dayOfWeek: weekdayFormat.string(from: date), date: date.formatted(.dateTime.day()))
+            dateStackView.addArrangedSubview(dateStackItem)
+        }
+    }
+    
     func setupCollectionView(){
         pastSessionsCollectionView.delegate = self
         pastSessionsCollectionView.dataSource = self
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pastSessions.count
