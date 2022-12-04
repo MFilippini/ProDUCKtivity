@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4903DFF1293C580300E10F60 /* GraphStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903DFF0293C580300E10F60 /* GraphStackItem.swift */; };
 		4953324B291DFB7F0020E9A8 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */; };
 		4953324D291DFBA10020E9A8 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953324C291DFBA10020E9A8 /* DataViewController.swift */; };
 		4953324F291DFBAC0020E9A8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953324E291DFBAC0020E9A8 /* SettingsViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4903DFF0293C580300E10F60 /* GraphStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStackItem.swift; sourceTree = "<group>"; };
 		4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		4953324C291DFBA10020E9A8 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4953324E291DFBAC0020E9A8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 		49FBD83F2914B8A200DD43B6 = {
 			isa = PBXGroup;
 			children = (
+				4903DFF0293C580300E10F60 /* GraphStackItem.swift */,
 				49F294C7293B57FC0014F4CA /* DateStackItem.swift */,
 				49FBD84A2914B8A200DD43B6 /* ProDUCKtivity */,
 				49FBD8492914B8A200DD43B6 /* Products */,
@@ -158,6 +161,7 @@
 			files = (
 				4953324B291DFB7F0020E9A8 /* ToDoViewController.swift in Sources */,
 				49F294C8293B57FC0014F4CA /* DateStackItem.swift in Sources */,
+				4903DFF1293C580300E10F60 /* GraphStackItem.swift in Sources */,
 				49629E2F292343BD0026E0A3 /* PastSessionCollectionViewCell.swift in Sources */,
 				49FBD8502914B8A200DD43B6 /* ViewController.swift in Sources */,
 				4953324F291DFBAC0020E9A8 /* SettingsViewController.swift in Sources */,

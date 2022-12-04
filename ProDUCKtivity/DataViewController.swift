@@ -12,6 +12,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var pastSessionsCollectionView: UICollectionView!
     
+    @IBOutlet weak var graphContainerView: UIView!
     @IBOutlet weak var graphStackView: UIStackView!
     @IBOutlet weak var dateStackView: UIStackView!
     
@@ -31,6 +32,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func setupGraph(){
         setupDateBar()
+        addDataToGraphs()
     }
     
     func setupDateBar(){
@@ -42,7 +44,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let weekdayFormat = DateFormatter()
         weekdayFormat.dateFormat = "EEEEE"
-        
+                
         // 2 is Monday and 8 is Sunday
         for weekdayNumber in 2...8 {
             components.weekday = weekdayNumber
@@ -52,6 +54,53 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
             dateStackView.addArrangedSubview(dateStackItem)
         }
     }
+    
+    func addDataToGraphs(){
+                
+        let a : [String : Any] = ["length" : 2.0, "color" : UIColor.red]
+        let b : [String : Any] = ["length" : 1.0, "color" : UIColor.blue]
+        let c : [String : Any] = ["length" : 4.0, "color" : UIColor.green]
+        
+        let view1 = GraphStackItem(dataForBar: [a,b,c], maxWeeklyTime: 7.0)
+        let view2 = GraphStackItem(dataForBar: [a,b], maxWeeklyTime: 7.0)
+        let view3 = GraphStackItem(dataForBar: [a,c], maxWeeklyTime: 7.0)
+        let view4 = GraphStackItem(dataForBar: [c,b], maxWeeklyTime: 7.0)
+        let view5 = GraphStackItem(dataForBar: [a,b], maxWeeklyTime: 7.0)
+        let view6 = GraphStackItem(dataForBar: [a,c], maxWeeklyTime: 7.0)
+        let view7 = GraphStackItem(dataForBar: [b,c], maxWeeklyTime: 7.0)
+
+        graphStackView.addArrangedSubview(view1)
+        graphStackView.addArrangedSubview(view2)
+        graphStackView.addArrangedSubview(view3)
+        graphStackView.addArrangedSubview(view4)
+        graphStackView.addArrangedSubview(view5)
+        graphStackView.addArrangedSubview(view6)
+        graphStackView.addArrangedSubview(view7)
+
+        let screenWidth = view.frame.width
+        
+        
+
+        for i in 0..<4 {
+            let yPos = CGFloat(i)*60.0
+            
+            let graphLine = UIView(frame: CGRect(x: 0, y: CGFloat(i)*60.0, width: screenWidth, height: 1))
+            graphLine.backgroundColor = .lightGray
+            
+            var label = UILabel(frame: CGRect(x: 5, y: yPos-20, width: 40, height: 20))
+            label.font = UIFont.systemFont(ofSize: 12)
+            label.layer.backgroundColor = CGColor(gray: 1, alpha: 0.8)
+            label.layer.cornerRadius = 10
+            label.text = "10 min"
+            graphContainerView.addSubview(label)
+            
+            graphContainerView.addSubview(graphLine)
+            graphContainerView.sendSubviewToBack(graphLine)
+        }
+        
+    }
+    
+    
     
     func setupCollectionView(){
         pastSessionsCollectionView.delegate = self
