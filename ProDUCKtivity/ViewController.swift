@@ -73,6 +73,7 @@ class ViewController: UIViewController {
         timerLabel.isHidden = false
         messageLabel.text = "You're doing great! Keep Flappin'"
         startButton.setTitle("End Focus", for: .normal)
+        //courtney add in here --> showing menu https://medium.nextlevelswif.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     }
     
     
