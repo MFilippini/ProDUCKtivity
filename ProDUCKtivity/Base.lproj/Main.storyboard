@@ -42,6 +42,9 @@
                                     </backgroundConfiguration>
                                     <color key="baseForegroundColor" name="AppColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="addReminder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6q8-iQ-wS0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,6 +52,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="ToDo" image="list.dash" catalog="system" id="j2x-YV-3aq"/>
                     <connections>
+                        <outlet property="add" destination="jAb-I8-NFY" id="PCF-lW-LGr"/>
                         <outlet property="tableView" destination="5wH-Mv-gUf" id="uNF-BO-gNg"/>
                     </connections>
                 </viewController>

@@ -22,6 +22,7 @@ class ReminderDoneButton: UIButton {
 class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     
+    @IBOutlet weak var add: UIButton!
     
     enum Errors :LocalizedError {
         case accessDenied
@@ -81,6 +82,11 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewWillAppear(animated)
         
     }
+    
+    @IBAction func addReminder(_ sender: Any) {
+        
+    }
+    
     
     func showError(_ error: Error) {
         let alert = UIAlertController(title:"", message: error.localizedDescription, preferredStyle: .alert )
