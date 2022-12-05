@@ -393,6 +393,10 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return CGSize(width: 300, height: 80)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toSessionDetail", sender: indexPath)
+    }
+    
     func loadSessionData(){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
