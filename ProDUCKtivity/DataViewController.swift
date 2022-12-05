@@ -19,8 +19,9 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var dateKeyedSessionData: DateKeyedSessionData = [:]
     
     var todaysWeekNumber = 0
+    var todaysYear = 0
     var viewingWeekNumer = 0
-    
+    var viewingYear = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +35,13 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func setWeekNumbers(){
         let calendar = Calendar(identifier: .iso8601)
         let weekNumber = calendar.component(.weekOfYear, from: Date.now)
-        
+        let year = calendar.component(.year, from: Date.now)
+
         todaysWeekNumber = weekNumber
         viewingWeekNumer = weekNumber
+        
+        todaysYear = year
+        viewingYear = year
     }
     
     func addSwipeFunctionality(){
@@ -53,7 +58,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // go forward in time
     @objc func graphSwipedLeft(sender: UISwipeGestureRecognizer){
-        if viewingWeekNumer < todaysWeekNumber {
+        if viewingYear < todaysYear ||  viewingWeekNumer < todaysWeekNumber {
             viewingWeekNumer += 1
             clearGraph()
             setupDateBar()
@@ -263,10 +268,11 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func setupDateBar(){
         let calendar = Calendar(identifier: .iso8601)
-        
+
         var components = DateComponents()
         components.weekOfYear = viewingWeekNumer
-        
+        components.year = viewingYear
+
         let weekdayFormat = DateFormatter()
         weekdayFormat.dateFormat = "EEEEE"
                 
@@ -283,12 +289,11 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func addDataToGraphs(){
                 
         let calendar = Calendar(identifier: .iso8601)
-        let year = calendar.component(.year, from: Date.now)
 
         
         var components = DateComponents()
         components.weekOfYear = viewingWeekNumer
-        components.year = year
+        components.year = viewingYear
         
         
         var maxWeeklyTime = 0
@@ -375,6 +380,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let duration = session.value(forKey: "duration") as! Int
         let category = session.value(forKey: "category") as! String
         
+        cell.colorBarView.backgroundColor = categoriesToColor[category] ?? UIColor(named: "RedAppColor")
         cell.dateLabel.text = date.formatted(Date.FormatStyle().month(.twoDigits).day(.defaultDigits))
         cell.categoryLabel.text = category
         
@@ -389,7 +395,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 80)
+        return CGSize(width: 280, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

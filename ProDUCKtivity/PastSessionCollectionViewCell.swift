@@ -9,6 +9,7 @@ import UIKit
 
 class PastSessionCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var colorBarView: UIView!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!

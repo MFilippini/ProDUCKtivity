@@ -13,9 +13,10 @@ class SessionDetailViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var categoryPicker: UIPickerView!
-
-    var session: NSManagedObject? = nil
+    @IBOutlet weak var colorBarView: UIView!
     
+    var session: NSManagedObject? = nil
+    var indexSelectedByPicker = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerViewSetup()
@@ -40,6 +41,10 @@ class SessionDetailViewController: UIViewController, UIPickerViewDelegate, UIPic
         return userCategories[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        indexSelectedByPicker = row
+    }
+    
     func fillSessionInformation(){
         let date = session?.value(forKey: "date") as! Date
         let duration = session?.value(forKey: "duration") as! Int
@@ -48,6 +53,10 @@ class SessionDetailViewController: UIViewController, UIPickerViewDelegate, UIPic
         let monthYearText = date.formatted(Date.FormatStyle().month(.twoDigits).day(.defaultDigits))
         let hourMinuteText = date.formatted(Date.FormatStyle().hour().minute())
         
+        let indexOfCategory = userCategories.firstIndex(of: category) ?? 0
+        
+        categoryPicker.selectRow(indexOfCategory, inComponent: 0, animated: false)
+        colorBarView.backgroundColor = categoriesToColor[category] ?? UIColor(named: "RedAppColor")
         timeLabel.text = "\(monthYearText) at \(hourMinuteText)"
         
         if duration > 60 {
@@ -66,8 +75,9 @@ class SessionDetailViewController: UIViewController, UIPickerViewDelegate, UIPic
         let context = appDelegate.persistentContainer.viewContext
         
         if let session = session {
+            let category = userCategories[categoryPicker.selectedRow(inComponent: 0)]
             
-            session.setValue("Read", forKey: "category")
+            session.setValue(category, forKey: "category")
 
             do {
                 try context.save()
