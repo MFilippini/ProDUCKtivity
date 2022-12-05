@@ -207,9 +207,6 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadSessionData()
@@ -253,7 +250,9 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
                 
             if dateKeyedSessionData[dateKey]?[category] == nil {
-                dateKeyedSessionData[dateKey]?[category] = CategoryGraphData(categoryTime: duration, categoryColor: .red)
+                let color = categoriesToColor[category] as? UIColor ?? .red
+                
+                dateKeyedSessionData[dateKey]?[category] = CategoryGraphData(categoryTime: duration, categoryColor: color)
             }
             else {
                 dateKeyedSessionData[dateKey]?[category]?.categoryTime += duration
@@ -391,6 +390,20 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 300, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toSessionDetail", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let sessionDetailVC = segue.destination as? SessionDetailViewController {
+            let indexPath = sender as! IndexPath
+            let session = pastSessions[indexPath.row]
+            
+            sessionDetailVC.session = session
+        }
     }
     
     func loadSessionData(){
