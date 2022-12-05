@@ -84,6 +84,31 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     @IBAction func addReminder(_ sender: Any) {
+        let alertController = UIAlertController(title: "Add new reminder", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Add", style: .default) { (_) in
+            if let txtField = alertController.textFields?.first, let text = txtField.text {
+                let reminder = Reminder(title:text, id:"")
+                self.addReminderToStore(reminder)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Reminder title"
+        }
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func addReminderToStore(_ reminder:Reminder) {
+        var reminder = reminder
+        do {
+            let idFromStore = try self.save(reminder)
+            reminder.id = idFromStore
+            theData.append(reminder)
+        } catch {
+            showError(error)
+        }
         
     }
     
@@ -126,9 +151,9 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 self.theData = []
                 for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
                     let reminderStruct = Reminder(title: remind?.title ?? "",id:remind?.calendarItemIdentifier ?? "", isCompleted:remind?.isCompleted ?? false, notes:remind?.notes ?? nil)
-//                    if(!reminderStruct.isCompleted) {
+                    if(remind?.completionDate ?? Date.now > Date.now.addingTimeInterval(-60)) {
                         self.theData.append(reminderStruct)
-//                    }
+                    }
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -142,15 +167,22 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let button = doneButtonConfiguration(for: theData[indexPath.row])
         
-        cell.accessoryView = button
-        button.sizeToFit()
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+
         if theData.count <= indexPath.row {
             return cell
         }
+        print(theData)
+        print(indexPath.row)
         cell.textLabel!.text = theData[indexPath.row].title
+        
+        
+        let button = doneButtonConfiguration(for: theData[indexPath.row])
+        
+        cell.accessoryView = button
+                        button.sizeToFit()
+
         return cell
     }
     
@@ -191,7 +223,6 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func completeReminder(with id: String) {
         var reminder = theData[theData.indexOfReminder(with: id)]
         reminder.isCompleted.toggle()
-        print("completed")
         update(reminder, with: id)
         do {
             try self.getReminders()
