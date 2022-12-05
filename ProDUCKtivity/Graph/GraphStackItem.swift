@@ -61,7 +61,7 @@ class GraphStackItem: UIView {
         timeLabel?.layer.borderColor = CGColor(gray: 0.8, alpha: 0.85)
         timeLabel?.textAlignment = .center
         timeLabel?.layer.shadowColor = CGColor(gray: 0.8, alpha: 0.85)
-        timeLabel?.text = "\(totalTime/60) hrs"
+        timeLabel?.text = String(format: "%.1f hrs", totalTime/(60*60))
         timeLabel?.isHidden = true
         self.addSubview(timeLabel!)
         self.bringSubviewToFront(timeLabel!)
