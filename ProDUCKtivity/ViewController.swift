@@ -12,7 +12,7 @@ import CoreData
 
 class ViewController: UIViewController {
 
-    
+    @IBOutlet weak var focusLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
@@ -103,14 +103,17 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Welcome", message: "Please select a category", preferredStyle: .actionSheet)
                alert.addAction(UIAlertAction(title: "Study", style: .default, handler: { (_) in
                    print("User chose study button")
+                   self.focusLabel.text = "You are focusing on studying!"
                }))
 
                alert.addAction(UIAlertAction(title: "Clean", style: .default, handler: { (_) in
                    print("User click clean button")
+                   self.focusLabel.text = "You are focusing on cleaning!"
                }))
 
                alert.addAction(UIAlertAction(title: "Read", style: .default, handler: { (_) in
                    print("User click read button")
+                   self.focusLabel.text = "You are focusing on reading!"
                }))
 
                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
@@ -157,6 +160,7 @@ class ViewController: UIViewController {
         else {
             displayUnfocusedState()
             logFocusSession()
+            self.focusLabel.text = ""
         }
     }
     
