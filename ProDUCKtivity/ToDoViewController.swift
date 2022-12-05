@@ -120,9 +120,9 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 self.theData = []
                 for remind: EKReminder? in reminders as? [EKReminder?] ?? [EKReminder?]() {
                     let reminderStruct = Reminder(title: remind?.title ?? "",id:remind?.calendarItemIdentifier ?? "", isCompleted:remind?.isCompleted ?? false, notes:remind?.notes ?? nil)
-                    if(!reminderStruct.isCompleted) {
+//                    if(!reminderStruct.isCompleted) {
                         self.theData.append(reminderStruct)
-                    }
+//                    }
                 }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
