@@ -225,8 +225,8 @@
                                             <constraint firstItem="CqP-O9-vcV" firstAttribute="top" secondItem="21a-kH-9L2" secondAttribute="top" id="wlv-CK-qPQ"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHq-eq-dMK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="MHq-eq-dMK">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="240"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -236,8 +236,8 @@
                                     <constraint firstItem="MHq-eq-dMK" firstAttribute="top" secondItem="Zu5-76-tYY" secondAttribute="top" id="aqx-4I-dwg"/>
                                     <constraint firstItem="21a-kH-9L2" firstAttribute="leading" secondItem="Zu5-76-tYY" secondAttribute="leading" id="b1J-T8-rYJ"/>
                                     <constraint firstAttribute="height" constant="300" id="bx7-dc-9Nf"/>
-                                    <constraint firstItem="MHq-eq-dMK" firstAttribute="leading" secondItem="Zu5-76-tYY" secondAttribute="leading" id="dHM-JW-AHd"/>
-                                    <constraint firstAttribute="trailing" secondItem="MHq-eq-dMK" secondAttribute="trailing" id="mZx-U9-pV7"/>
+                                    <constraint firstItem="MHq-eq-dMK" firstAttribute="leading" secondItem="Zu5-76-tYY" secondAttribute="leading" constant="20" id="dHM-JW-AHd"/>
+                                    <constraint firstAttribute="trailing" secondItem="MHq-eq-dMK" secondAttribute="trailing" constant="20" id="mZx-U9-pV7"/>
                                     <constraint firstAttribute="bottom" secondItem="21a-kH-9L2" secondAttribute="bottom" id="wzf-en-a6L"/>
                                 </constraints>
                             </view>
@@ -265,6 +265,7 @@
                     <tabBarItem key="tabBarItem" title="Data" image="chart.xyaxis.line" catalog="system" id="HJe-zn-dwr"/>
                     <connections>
                         <outlet property="dateStackView" destination="CqP-O9-vcV" id="Ynp-xz-Xv9"/>
+                        <outlet property="graphContainerView" destination="Zu5-76-tYY" id="iS5-Ob-SV5"/>
                         <outlet property="graphStackView" destination="MHq-eq-dMK" id="Xc3-hh-8NP"/>
                         <outlet property="pastSessionsCollectionView" destination="AyQ-Ac-UIl" id="Hss-Th-qb1"/>
                     </connections>
