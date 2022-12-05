@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40EDE703293D997300A188C4 /* EKReminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EDE702293D997300A188C4 /* EKReminder.swift */; };
 		4903DFF1293C580300E10F60 /* GraphStackItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4903DFF0293C580300E10F60 /* GraphStackItem.swift */; };
 		4953324B291DFB7F0020E9A8 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */; };
 		4953324D291DFBA10020E9A8 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4953324C291DFBA10020E9A8 /* DataViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40EDE702293D997300A188C4 /* EKReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKReminder.swift; sourceTree = "<group>"; };
 		4903DFF0293C580300E10F60 /* GraphStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStackItem.swift; sourceTree = "<group>"; };
 		4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		4953324C291DFBA10020E9A8 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				4953324C291DFBA10020E9A8 /* DataViewController.swift */,
 				49629E2E292343BD0026E0A3 /* PastSessionCollectionViewCell.swift */,
 				4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */,
+				40EDE702293D997300A188C4 /* EKReminder.swift */,
 				49FBD8512914B8A200DD43B6 /* Main.storyboard */,
 				49FBD8572914B8A400DD43B6 /* Assets.xcassets */,
 				49FBD8592914B8A400DD43B6 /* LaunchScreen.storyboard */,
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40EDE703293D997300A188C4 /* EKReminder.swift in Sources */,
 				4953324B291DFB7F0020E9A8 /* ToDoViewController.swift in Sources */,
 				49F294C8293B57FC0014F4CA /* DateStackItem.swift in Sources */,
 				4903DFF1293C580300E10F60 /* GraphStackItem.swift in Sources */,
