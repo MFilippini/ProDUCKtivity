@@ -55,12 +55,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49FBD83F2914B8A200DD43B6 = {
+		49D73936293DB83C00F9445E /* Graph */ = {
 			isa = PBXGroup;
 			children = (
 				4903DFF2293D743000E10F60 /* GraphDataModel.swift */,
 				4903DFF0293C580300E10F60 /* GraphStackItem.swift */,
 				49F294C7293B57FC0014F4CA /* DateStackItem.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		49FBD83F2914B8A200DD43B6 = {
+			isa = PBXGroup;
+			children = (
 				49FBD84A2914B8A200DD43B6 /* ProDUCKtivity */,
 				49FBD8492914B8A200DD43B6 /* Products */,
 			);
@@ -77,6 +84,7 @@
 		49FBD84A2914B8A200DD43B6 /* ProDUCKtivity */ = {
 			isa = PBXGroup;
 			children = (
+				49D73936293DB83C00F9445E /* Graph */,
 				49FBD84B2914B8A200DD43B6 /* AppDelegate.swift */,
 				49FBD84D2914B8A200DD43B6 /* SceneDelegate.swift */,
 				49FBD84F2914B8A200DD43B6 /* ViewController.swift */,

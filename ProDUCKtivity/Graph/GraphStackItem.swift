@@ -20,7 +20,12 @@ class GraphStackItem: UIView {
             totalTime += Double(categoryData.categoryTime)
         }
         
-        let totalHeight = totalTime * (240.0/maxWeeklyTime)
+        var totalHeight = totalTime * (240.0/maxWeeklyTime)
+        
+        if maxWeeklyTime <= 0 {
+            totalHeight = 1
+        }
+        
         let barFrame = CGRect(x: 0, y: 0, width: 40, height: totalHeight)
         
         super.init(frame: barFrame)
