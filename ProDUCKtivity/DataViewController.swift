@@ -172,6 +172,10 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func setupCollectionView(){
         pastSessionsCollectionView.delegate = self
         pastSessionsCollectionView.dataSource = self
+        
+        pastSessionsCollectionView.layer.borderWidth = 8
+        pastSessionsCollectionView.layer.cornerRadius = 40
+        pastSessionsCollectionView.layer.borderColor = UIColor(named: "AppColor")?.cgColor
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -200,7 +204,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 100)
+        return CGSize(width: 300, height: 80)
     }
     
     func loadSessionData(){
