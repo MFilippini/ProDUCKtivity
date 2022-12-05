@@ -98,7 +98,29 @@ class ViewController: UIViewController {
     //topLabel.text = Keep focusing on *whatever u picked* 
      
    
-    
+    //func for alert view - study clean read
+    func alertYuh() {
+        let alert = UIAlertController(title: "Welcome", message: "Please select a category", preferredStyle: .actionSheet)
+               alert.addAction(UIAlertAction(title: "Study", style: .default, handler: { (_) in
+                   print("User chose study button")
+               }))
+
+               alert.addAction(UIAlertAction(title: "Clean", style: .default, handler: { (_) in
+                   print("User click clean button")
+               }))
+
+               alert.addAction(UIAlertAction(title: "Read", style: .default, handler: { (_) in
+                   print("User click read button")
+               }))
+
+               alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (_) in
+                   print("User click Dismiss button")
+               }))
+
+               self.present(alert, animated: true, completion: {
+                   print("completion block")
+               })
+           }
 
   
     //end sec
@@ -121,7 +143,6 @@ class ViewController: UIViewController {
   
         
     
-        //courtney add in here --> showing menu https://medium.nextlevelswif.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     }
     
     
@@ -129,7 +150,7 @@ class ViewController: UIViewController {
         isInFocusMode = !isInFocusMode
        
         if isInFocusMode {
-           
+            alertYuh()
             displayFocusedState()
             startFocusTimer()
         }
