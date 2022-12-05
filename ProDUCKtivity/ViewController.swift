@@ -95,8 +95,8 @@ class ViewController: UIViewController {
 
    //idea for showing how pop up connects
         //func for each category that changes a text label to say what you're focusing on
-    //topLabel.text = Keep focusing on *whatever u picked*
-    
+    //topLabel.text = Keep focusing on *whatever u picked* 
+     
    
     
 
