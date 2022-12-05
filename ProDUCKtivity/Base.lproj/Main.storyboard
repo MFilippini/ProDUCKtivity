@@ -79,7 +79,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get your ducks in a row!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTA-rF-iPf">
-                                <rect key="frame" x="28" y="99" width="334.33333333333331" height="100"/>
+                                <rect key="frame" x="28" y="99" width="334" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="ve6-e9-bkP"/>
                                 </constraints>
@@ -101,22 +101,37 @@
                                     <action selector="focusButtonClicked:" destination="ZDp-WR-KU4" eventType="touchUpInside" id="DhC-pe-Jvt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6t-FZ-jTT">
+                                <rect key="frame" x="28" y="441" width="334.33333333333331" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="2yL-qW-IDi"/>
+                                    <constraint firstAttribute="height" constant="100" id="IO3-J6-L5r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aTK-Ae-2PS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aTK-Ae-2PS" firstAttribute="bottom" secondItem="AkI-hH-96N" secondAttribute="bottom" constant="90" id="AcO-kb-bVC"/>
+                            <constraint firstItem="u6t-FZ-jTT" firstAttribute="leading" secondItem="HTA-rF-iPf" secondAttribute="leading" id="EHu-c9-rIe"/>
                             <constraint firstItem="PkO-My-4MQ" firstAttribute="centerX" secondItem="1gk-ny-5Si" secondAttribute="centerX" id="HdO-am-RPx"/>
+                            <constraint firstItem="AkI-hH-96N" firstAttribute="top" secondItem="u6t-FZ-jTT" secondAttribute="bottom" constant="65" id="HhI-Es-IWm"/>
                             <constraint firstItem="HTA-rF-iPf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aTK-Ae-2PS" secondAttribute="leading" id="HiS-mb-L8w"/>
                             <constraint firstItem="PkO-My-4MQ" firstAttribute="top" secondItem="HTA-rF-iPf" secondAttribute="bottom" constant="100" id="OzT-pz-5Ht"/>
                             <constraint firstItem="HTA-rF-iPf" firstAttribute="top" secondItem="aTK-Ae-2PS" secondAttribute="top" constant="55" id="REd-gF-DwN"/>
                             <constraint firstItem="aTK-Ae-2PS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HTA-rF-iPf" secondAttribute="trailing" id="hS0-GJ-tAe"/>
                             <constraint firstItem="AkI-hH-96N" firstAttribute="centerX" secondItem="1gk-ny-5Si" secondAttribute="centerX" id="hSO-5L-FvD"/>
                             <constraint firstItem="HTA-rF-iPf" firstAttribute="centerX" secondItem="1gk-ny-5Si" secondAttribute="centerX" id="hxC-t0-eL7"/>
+                            <constraint firstItem="u6t-FZ-jTT" firstAttribute="leading" secondItem="aTK-Ae-2PS" secondAttribute="leading" constant="28" id="rmA-Xu-e8C"/>
+                            <constraint firstItem="aTK-Ae-2PS" firstAttribute="trailing" secondItem="u6t-FZ-jTT" secondAttribute="trailing" constant="27.670000000000002" id="xLE-9u-5il"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="HXG-5o-Vff"/>
                     <connections>
+                        <outlet property="focusLabel" destination="u6t-FZ-jTT" id="4GH-P6-0uv"/>
                         <outlet property="messageLabel" destination="HTA-rF-iPf" id="juB-lq-AyD"/>
                         <outlet property="startButton" destination="AkI-hH-96N" id="FBA-ik-68Z"/>
                         <outlet property="timerLabel" destination="PkO-My-4MQ" id="Xyk-rV-0Rb"/>
@@ -393,7 +408,7 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wcf-Nv-VRl">
-                                <rect key="frame" x="55" y="457" width="325" height="216"/>
+                                <rect key="frame" x="55" y="457.33333333333326" width="325" height="216"/>
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fHT-Cl-aNe"/>
