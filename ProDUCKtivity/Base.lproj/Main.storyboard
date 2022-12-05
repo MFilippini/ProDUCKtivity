@@ -370,7 +370,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K59-LQ-kO3">
-                                <rect key="frame" x="25" y="159" width="20" height="501"/>
+                                <rect key="frame" x="25" y="159" width="20" height="500"/>
                                 <color key="backgroundColor" name="AppColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="3uU-IS-K2b"/>
@@ -389,7 +389,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmV-MD-GNj">
-                                <rect key="frame" x="30" y="692" width="330" height="32"/>
+                                <rect key="frame" x="30" y="691" width="330" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Vcu-b3-bLh"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Save">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
@@ -399,9 +402,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzZ-ob-Rin">
-                                <rect key="frame" x="30" y="739" width="330" height="31"/>
+                                <rect key="frame" x="30" y="738" width="330" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="wLI-Ot-TxZ"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Delete"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Delete">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="deleteButtonPressed:" destination="UOy-KS-omm" eventType="touchUpInside" id="Nir-yb-xh5"/>
                                 </connections>

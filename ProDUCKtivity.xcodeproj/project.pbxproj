@@ -30,6 +30,7 @@
 		40EDE702293D997300A188C4 /* EKReminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKReminder.swift; sourceTree = "<group>"; };
 		4903DFF0293C580300E10F60 /* GraphStackItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStackItem.swift; sourceTree = "<group>"; };
 		4903DFF2293D743000E10F60 /* GraphDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataModel.swift; sourceTree = "<group>"; };
+		49089E48293DE4070013F895 /* DemoDataHelper.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DemoDataHelper.md; sourceTree = "<group>"; };
 		4953324A291DFB7F0020E9A8 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		4953324C291DFBA10020E9A8 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		4953324E291DFBAC0020E9A8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 				49FBD8572914B8A400DD43B6 /* Assets.xcassets */,
 				49FBD8592914B8A400DD43B6 /* LaunchScreen.storyboard */,
 				49FBD85C2914B8A400DD43B6 /* Info.plist */,
+				49089E48293DE4070013F895 /* DemoDataHelper.md */,
 				49FBD8542914B8A200DD43B6 /* ProDUCKtivity.xcdatamodeld */,
 			);
 			path = ProDUCKtivity;

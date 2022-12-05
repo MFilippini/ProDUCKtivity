@@ -52,8 +52,8 @@ class ViewController: UIViewController {
         var dateComps = DateComponents()
         dateComps.calendar = Calendar.current
      
-        dateComps.hour = 21
-        dateComps.minute = 40
+        dateComps.hour = 2
+        dateComps.minute = 21
         
         
         let trigger = UNCalendarNotificationTrigger (dateMatching: dateComps, repeats: true)
