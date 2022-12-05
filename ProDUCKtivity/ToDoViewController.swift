@@ -61,13 +61,7 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 print("access granted")
                 self.accessGranted = true
                 NotificationCenter.default.addObserver(self, selector: #selector(self.eventStoreChanged(_:)), name: .EKEventStoreChanged, object: nil)
-                do {
-                    try self.getReminders()
-                } catch Errors.accessDenied {
-                    self.showError(Errors.accessDenied)
-                } catch {
-                    self.showError(error)
-                }
+                
             }
             else {
                 self.accessGranted = false
@@ -80,7 +74,13 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        do {
+            try self.getReminders()
+        } catch Errors.accessDenied {
+            self.showError(Errors.accessDenied)
+        } catch {
+            self.showError(error)
+        }
     }
     
     @IBAction func addReminder(_ sender: Any) {
@@ -173,8 +173,6 @@ class ToDoViewController: UIViewController,UITableViewDataSource,UITableViewDele
         if theData.count <= indexPath.row {
             return cell
         }
-        print(theData)
-        print(indexPath.row)
         cell.textLabel!.text = theData[indexPath.row].title
         
         
