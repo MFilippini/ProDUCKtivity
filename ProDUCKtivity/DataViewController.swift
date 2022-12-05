@@ -17,22 +17,61 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var dateStackView: UIStackView!
     
     var pastSessions: [NSManagedObject] = []
+    var dateKeyedSessionData: DateKeyedSessionData = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupGraph()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadSessionData()
+        setupGraph()
         pastSessionsCollectionView.reloadData()
     }
     
     func setupGraph(){
+        clearGraphAndData()
+        keySessionData()
         setupDateBar()
         addDataToGraphs()
+    }
+    
+    func clearGraphAndData() {
+        dateKeyedSessionData = [:]
+        
+        for arrangedSubview in graphStackView.arrangedSubviews {
+            arrangedSubview.removeFromSuperview()
+        }
+        
+        for arrangedSubview in dateStackView.arrangedSubviews {
+            arrangedSubview.removeFromSuperview()
+        }
+        
+    }
+    
+    func keySessionData(){
+        
+        for session in pastSessions {
+            let date = session.value(forKey: "date") as! Date
+            let duration = session.value(forKey: "duration") as! Int
+            let category = session.value(forKey: "category") as! String
+            
+            let dateKey = date.formatted(dateKeyFormatStyle)
+
+            if dateKeyedSessionData[dateKey] == nil {
+                dateKeyedSessionData[dateKey] = [:]
+            }
+                
+            if dateKeyedSessionData[dateKey]?[category] == nil {
+                dateKeyedSessionData[dateKey]?[category] = CategoryGraphData(categoryTime: duration, categoryColor: .red)
+            }
+            else {
+                dateKeyedSessionData[dateKey]?[category]?.categoryTime += duration
+            }
+            
+        }
     }
     
     func setupDateBar(){
@@ -57,25 +96,51 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func addDataToGraphs(){
                 
-        let a : [String : Any] = ["length" : 2.0, "color" : UIColor.red]
-        let b : [String : Any] = ["length" : 1.0, "color" : UIColor.blue]
-        let c : [String : Any] = ["length" : 4.0, "color" : UIColor.green]
-        
-        let view1 = GraphStackItem(dataForBar: [a,b,c], maxWeeklyTime: 7.0)
-        let view2 = GraphStackItem(dataForBar: [a,b], maxWeeklyTime: 7.0)
-        let view3 = GraphStackItem(dataForBar: [a,c], maxWeeklyTime: 7.0)
-        let view4 = GraphStackItem(dataForBar: [c,b], maxWeeklyTime: 7.0)
-        let view5 = GraphStackItem(dataForBar: [a,b], maxWeeklyTime: 7.0)
-        let view6 = GraphStackItem(dataForBar: [a,c], maxWeeklyTime: 7.0)
-        let view7 = GraphStackItem(dataForBar: [b,c], maxWeeklyTime: 7.0)
+        let calendar = Calendar(identifier: .iso8601)
+        let weekNumber = calendar.component(.weekOfYear, from: Date.now)
+        let year = calendar.component(.year, from: Date.now)
 
-        graphStackView.addArrangedSubview(view1)
-        graphStackView.addArrangedSubview(view2)
-        graphStackView.addArrangedSubview(view3)
-        graphStackView.addArrangedSubview(view4)
-        graphStackView.addArrangedSubview(view5)
-        graphStackView.addArrangedSubview(view6)
-        graphStackView.addArrangedSubview(view7)
+        
+        var components = DateComponents()
+        components.weekOfYear = weekNumber
+        components.year = year
+        
+        
+        var maxWeeklyTime = 0
+        
+        // 2 is Monday and 8 is Sunday
+        for weekdayNumber in 2...8 {
+            components.weekday = weekdayNumber
+            let date = calendar.date(from: components) ?? Date.now
+            
+            let dateKey = date.formatted(dateKeyFormatStyle)
+                        
+            if let sessions = dateKeyedSessionData[dateKey] {
+                var dailyTotal = 0
+                for (_, categoryData) in sessions {
+                    dailyTotal += categoryData.categoryTime
+                }
+                maxWeeklyTime = max(maxWeeklyTime, dailyTotal)
+            }
+        }
+                
+        // 2 is Monday and 8 is Sunday
+        for weekdayNumber in 2...8 {
+            components.weekday = weekdayNumber
+            let date = calendar.date(from: components) ?? Date.now
+            
+            let dateKey = date.formatted(dateKeyFormatStyle)
+            
+            if let sessions = dateKeyedSessionData[dateKey] {
+                let newGraphBar = GraphStackItem(dataForBar: sessions, maxWeeklyTime: Double(maxWeeklyTime))
+
+                graphStackView.addArrangedSubview(newGraphBar)
+            }
+            else {
+                graphStackView.addArrangedSubview(GraphStackItem(dataForBar: [:], maxWeeklyTime: Double(maxWeeklyTime)))
+            }
+        }
+        
 
         let screenWidth = view.frame.width
         
@@ -87,11 +152,13 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let graphLine = UIView(frame: CGRect(x: 0, y: CGFloat(i)*60.0, width: screenWidth, height: 1))
             graphLine.backgroundColor = .lightGray
             
-            var label = UILabel(frame: CGRect(x: 5, y: yPos-20, width: 40, height: 20))
+            let barLabelTime = (Double(maxWeeklyTime) / 60) * ((4-Double(i))/4.0)
+            
+            let label = UILabel(frame: CGRect(x: 5, y: yPos-20, width: 40, height: 20))
             label.font = UIFont.systemFont(ofSize: 12)
             label.layer.backgroundColor = CGColor(gray: 1, alpha: 0.8)
             label.layer.cornerRadius = 10
-            label.text = "10 min"
+            label.text = String(format: "%.1f hrs", barLabelTime)
             graphContainerView.addSubview(label)
             
             graphContainerView.addSubview(graphLine)
@@ -105,6 +172,10 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func setupCollectionView(){
         pastSessionsCollectionView.delegate = self
         pastSessionsCollectionView.dataSource = self
+        
+        pastSessionsCollectionView.layer.borderWidth = 8
+        pastSessionsCollectionView.layer.cornerRadius = 40
+        pastSessionsCollectionView.layer.borderColor = UIColor(named: "AppColor")?.cgColor
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -133,7 +204,7 @@ class DataViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 100)
+        return CGSize(width: 300, height: 80)
     }
     
     func loadSessionData(){

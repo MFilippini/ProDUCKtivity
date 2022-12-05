@@ -21,11 +21,16 @@ class ViewController: UIViewController {
     var focusTimer = Timer()
     var focusTime = 0
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        startButton.menu = showMenu()
+//        startButton.showsMenuAsPrimaryAction = true
         setupNotifications()
         displayUnfocusedState()
+     
+
     }
     
     func setupNotifications(){
@@ -62,25 +67,69 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
+    //sec adding in menu
+    let cat1 = UIAction(title: "cooking", image: UIImage(systemName: "cart")) { (action) in
+
+             print("cooking action was tapped")
+        }
+
+        let cat2 = UIAction(title: "sleeping", image: UIImage(systemName: "moon")) { (action) in
+
+            print("sleeping action was tapped")
+            
+        }
+
+        let cat3 = UIAction(title: "studying", image: UIImage(systemName: "pencil")) { (action) in
+             print("studying was tapped")
+        }
+ 
+    func showMenu() -> UIMenu {
+        let menuIts = UIMenu(title: "Select options", options: .displayInline, children: [cat1,cat2,cat3])
+        
+        return menuIts
+        
+    }
+ 
+
+   //idea for showing how pop up connects
+        //func for each category that changes a text label to say what you're focusing on
+    //topLabel.text = Keep focusing on *whatever u picked* 
+     
+   
+    
+
+  
+    //end sec
+    
     func displayUnfocusedState(){
+       
         timerLabel.isHidden = true
         messageLabel.text = "Get your ducks in a row!"
         startButton.setTitle("Get Focused", for: .normal)
+        
     }
     
     func displayFocusedState(){
+      
         timerLabel.text = "0:00"
         timerLabel.isHidden = false
         messageLabel.text = "You're doing great! Keep Flappin'"
         startButton.setTitle("End Focus", for: .normal)
+        
+  
+        
+    
         //courtney add in here --> showing menu https://medium.nextlevelswif.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     }
     
     
     @IBAction func focusButtonClicked(_ sender: Any) {
         isInFocusMode = !isInFocusMode
-        
+       
         if isInFocusMode {
+           
             displayFocusedState()
             startFocusTimer()
         }
